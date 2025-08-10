@@ -12,7 +12,9 @@
 2. Install with default settings
 3. Use Anaconda Navigator or `conda` commands
 
-### Option 3: Windows Package Manager
+### Option 3: Package Managers
+
+#### Windows
 ```powershell
 # Install using winget (Windows 10/11)
 winget install Python.Python.3.9
@@ -21,9 +23,25 @@ winget install Python.Python.3.9
 choco install python
 ```
 
+#### macOS
+```bash
+# Install using Homebrew (recommended)
+brew install python@3.11
+
+# Or using MacPorts
+sudo port install python311
+
+# Or using pyenv (version management)
+brew install pyenv
+pyenv install 3.11.0
+pyenv global 3.11.0
+```
+
 ## 🚀 Environment Setup
 
 ### Step 1: Create Virtual Environment
+
+#### Windows
 ```powershell
 # Navigate to learning folder
 cd "c:\Users\harshitmago\Documents\learning"
@@ -37,7 +55,23 @@ ml_env\Scripts\activate
 # You should see (ml_env) in your prompt
 ```
 
+#### macOS/Linux
+```bash
+# Navigate to learning folder
+cd ~/Documents/learning/machine_learning/mahine_learning
+
+# Create virtual environment
+python3 -m venv ml_env
+
+# Activate environment (macOS/Linux)
+source ml_env/bin/activate
+
+# You should see (ml_env) in your prompt
+```
+
 ### Step 2: Install Packages
+
+#### Windows
 ```powershell
 # Upgrade pip first
 python -m pip install --upgrade pip
@@ -55,10 +89,39 @@ pip install openai langchain streamlit
 pip install -r requirements.txt
 ```
 
+#### macOS/Linux
+```bash
+# Upgrade pip first
+python3 -m pip install --upgrade pip
+
+# Install core packages (start with these)
+pip3 install numpy pandas matplotlib seaborn scikit-learn jupyter
+
+# Install deep learning (after core packages work)
+pip3 install torch torchvision tensorflow
+
+# Install LLM and AI packages
+pip3 install openai langchain streamlit
+
+# Or install everything at once
+pip3 install -r requirements.txt
+```
+
 ### Step 3: Verify Installation
+
+#### Windows
 ```powershell
 # Test core packages
 python -c "import numpy, pandas, sklearn, matplotlib; print('Core packages OK!')"
+
+# Launch Jupyter
+jupyter lab
+```
+
+#### macOS/Linux
+```bash
+# Test core packages
+python3 -c "import numpy, pandas, sklearn, matplotlib; print('Core packages OK!')"
 
 # Launch Jupyter
 jupyter lab
@@ -82,8 +145,8 @@ If you have installation issues, use Google Colab:
 4. Select Python interpreter from your virtual environment
 
 ### Jupyter Lab
-```powershell
-# After activating environment
+```bash
+# After activating environment (cross-platform)
 jupyter lab
 ```
 
@@ -121,20 +184,48 @@ streamlit>=1.25.0   # Web apps
 ### Common Issues
 
 **1. Python not found**
-- Reinstall Python with "Add to PATH" checked
-- Restart terminal/VS Code
+- **Windows**: Reinstall Python with "Add to PATH" checked, restart terminal/VS Code
+- **macOS**: Install via Homebrew (`brew install python@3.11`) or ensure `/usr/local/bin` is in PATH
 
 **2. Permission errors**
-- Run terminal as administrator
-- Use `--user` flag: `pip install --user package_name`
+- **Windows**: Run terminal as administrator, use `--user` flag: `pip install --user package_name`
+- **macOS**: Use `sudo` for system installs or `--user` flag: `pip3 install --user package_name`
 
 **3. Package conflicts**
 - Create fresh virtual environment
 - Install packages one by one
 
 **4. Jupyter not starting**
-- Try: `python -m jupyter lab`
+- Try: `python -m jupyter lab` (Windows) or `python3 -m jupyter lab` (macOS)
 - Install: `pip install ipykernel`
+
+**5. macOS-specific issues**
+- **Command Line Tools**: Install with `xcode-select --install`
+- **Homebrew**: Install from [brew.sh](https://brew.sh) if not present
+- **M1/M2 Macs**: Some packages may need specific conda-forge versions
+
+## 💻 macOS-Specific Tips
+
+### Terminal Setup
+- Use **Terminal** (built-in) or **iTerm2** (enhanced features)
+- Add to `.zshrc` or `.bash_profile` for permanent PATH changes:
+  ```bash
+  export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+  ```
+
+### Homebrew Installation
+```bash
+# Install Homebrew (macOS package manager)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Python and common tools
+brew install python@3.11 git
+```
+
+### Apple Silicon (M1/M2/M3) Considerations
+- Use `conda` for some packages that may not have native ARM builds
+- Install Rosetta 2 if needed: `softwareupdate --install-rosetta`
+- Consider using `conda-forge` channel for better compatibility
 
 ### Getting Help
 - Check package documentation
