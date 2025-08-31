@@ -50,6 +50,73 @@ Imagine you are a chef preparing a large meal. Each ingredient represents a numb
 
 Mastering matrix operations is essential for anyone looking to delve into machine learning. These operations form the backbone of many algorithms and provide the tools needed to manipulate and analyze data effectively. As you progress in your learning journey, keep practicing these operations to build a solid foundation in linear algebra.
 
+## Mathematical Foundation
+
+### Key Formulas
+
+**Matrix Notation:**
+
+- Matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{bmatrix}$ (m × n matrix)
+
+**Matrix Operations:**
+
+- **Addition**: $(A + B)_{ij} = A_{ij} + B_{ij}$
+- **Scalar multiplication**: $(kA)_{ij} = k \cdot A_{ij}$
+- **Matrix multiplication**: $(AB)_{ij} = \sum_{k=1}^{n} A_{ik}B_{kj}$
+- **Transpose**: $(A^T)_{ij} = A_{ji}$
+- **Determinant (2×2)**: $\det(A) = a_{11}a_{22} - a_{12}a_{21}$
+- **Inverse (2×2)**: $A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} a_{22} & -a_{12} \\ -a_{21} & a_{11} \end{bmatrix}$
+
+### Solved Examples
+
+#### Example 1: Matrix Addition and Scalar Multiplication
+
+Given: $A = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}$ and $B = \begin{bmatrix} 5 & 1 \\ 3 & 2 \end{bmatrix}$
+
+Find: $2A + 3B$
+
+Solution:
+Step 1: Calculate $2A$
+$$2A = 2 \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix} = \begin{bmatrix} 2 & 6 \\ 4 & 8 \end{bmatrix}$$
+
+Step 2: Calculate $3B$
+$$3B = 3 \begin{bmatrix} 5 & 1 \\ 3 & 2 \end{bmatrix} = \begin{bmatrix} 15 & 3 \\ 9 & 6 \end{bmatrix}$$
+
+Step 3: Add the results
+$$2A + 3B = \begin{bmatrix} 2 & 6 \\ 4 & 8 \end{bmatrix} + \begin{bmatrix} 15 & 3 \\ 9 & 6 \end{bmatrix} = \begin{bmatrix} 17 & 9 \\ 13 & 14 \end{bmatrix}$$
+
+#### Example 2: Matrix Multiplication
+
+Given: $A = \begin{bmatrix} 2 & 1 \\ 3 & 4 \end{bmatrix}$ and $B = \begin{bmatrix} 1 & 2 \\ 5 & 3 \end{bmatrix}$
+
+Find: $AB$
+
+Solution:
+Using $(AB)_{ij} = \sum_{k=1}^{n} A_{ik}B_{kj}$
+
+Step 1: Calculate each element
+$$(AB)_{11} = (2)(1) + (1)(5) = 2 + 5 = 7$$
+$$(AB)_{12} = (2)(2) + (1)(3) = 4 + 3 = 7$$
+$$(AB)_{21} = (3)(1) + (4)(5) = 3 + 20 = 23$$
+$$(AB)_{22} = (3)(2) + (4)(3) = 6 + 12 = 18$$
+
+Result: $AB = \begin{bmatrix} 7 & 7 \\ 23 & 18 \end{bmatrix}$
+
+#### Example 3: Matrix Inverse Calculation
+
+Given: $A = \begin{bmatrix} 3 & 1 \\ 2 & 4 \end{bmatrix}$
+
+Find: $A^{-1}$
+
+Solution:
+Step 1: Calculate determinant
+$$\det(A) = (3)(4) - (1)(2) = 12 - 2 = 10$$
+
+Step 2: Apply inverse formula (since $\det(A) \neq 0$, inverse exists)
+$$A^{-1} = \frac{1}{10} \begin{bmatrix} 4 & -1 \\ -2 & 3 \end{bmatrix} = \begin{bmatrix} 0.4 & -0.1 \\ -0.2 & 0.3 \end{bmatrix}$$
+
+Verification: $AA^{-1} = \begin{bmatrix} 3 & 1 \\ 2 & 4 \end{bmatrix} \begin{bmatrix} 0.4 & -0.1 \\ -0.2 & 0.3 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = I$ ✓
+
 ### Suggested Exercises
 
 - Perform matrix addition and subtraction with different matrices.

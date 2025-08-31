@@ -41,6 +41,96 @@ Consider a scenario where you are tasked with predicting house prices based on v
 ## Conclusion
 Model selection is a vital part of the machine learning workflow. By understanding the concepts of overfitting, underfitting, cross-validation, and the bias-variance tradeoff, you can make informed decisions about which models to use and how to optimize their performance.
 
+## Mathematical Foundation
+
+### Key Formulas
+
+**Cross-Validation Error:**
+$$CV_k = \frac{1}{k} \sum_{i=1}^{k} L(y_i, \hat{f}^{(-i)}(x_i))$$
+
+Where $\hat{f}^{(-i)}$ is the model trained without fold $i$.
+
+**Model Selection Criterion (AIC):**
+$$AIC = 2k - 2\ln(\hat{L})$$
+
+Where $k$ is the number of parameters and $\hat{L}$ is the maximum likelihood.
+
+**Bayesian Information Criterion (BIC):**
+$$BIC = k\ln(n) - 2\ln(\hat{L})$$
+
+Where $n$ is the number of observations.
+
+**Learning Curve Analysis:**
+Training Error: $E_{train}(m) = \frac{1}{m}\sum_{i=1}^{m} L(y_i, \hat{f}_m(x_i))$
+Validation Error: $E_{val}(m) = \frac{1}{|V|}\sum_{i \in V} L(y_i, \hat{f}_m(x_i))$
+
+### Solved Examples
+
+#### Example 1: K-Fold Cross-Validation Calculation
+
+Given: Dataset with 100 samples, 5-fold CV, model errors on each fold:
+Fold 1: RMSE = 2.3, Fold 2: RMSE = 2.7, Fold 3: RMSE = 2.1, Fold 4: RMSE = 2.5, Fold 5: RMSE = 2.4
+
+Find: Cross-validation RMSE and standard error
+
+Solution:
+Step 1: Calculate mean CV error
+$$CV_5 = \frac{1}{5}(2.3 + 2.7 + 2.1 + 2.5 + 2.4) = \frac{12.0}{5} = 2.4$$
+
+Step 2: Calculate standard error
+$$SE = \sqrt{\frac{1}{4}\sum_{i=1}^{5}(RMSE_i - 2.4)^2}$$
+$$SE = \sqrt{\frac{1}{4}[(2.3-2.4)^2 + (2.7-2.4)^2 + (2.1-2.4)^2 + (2.5-2.4)^2 + (2.4-2.4)^2]}$$
+$$SE = \sqrt{\frac{1}{4}[0.01 + 0.09 + 0.09 + 0.01 + 0]} = \sqrt{0.05} = 0.224$$
+
+Result: CV RMSE = 2.4 ± 0.224
+
+#### Example 2: AIC Model Comparison
+
+Compare two models:
+- Model A: Linear regression with 3 parameters, log-likelihood = -150
+- Model B: Polynomial regression with 8 parameters, log-likelihood = -145
+
+Find: Which model is better according to AIC?
+
+Solution:
+Step 1: Calculate AIC for Model A
+$$AIC_A = 2(3) - 2(-150) = 6 + 300 = 306$$
+
+Step 2: Calculate AIC for Model B
+$$AIC_B = 2(8) - 2(-145) = 16 + 290 = 306$$
+
+Step 3: Compare AICs
+Since $AIC_A = AIC_B = 306$, both models are equivalent according to AIC.
+
+Result: Both models have equal complexity-adjusted performance.
+
+#### Example 3: Learning Curve Analysis
+
+Given: Training set sizes [20, 40, 60, 80, 100]
+Training errors: [0.8, 0.6, 0.5, 0.45, 0.42]
+Validation errors: [2.5, 2.2, 2.0, 1.9, 1.8]
+
+Find: Diagnose if model has high bias or high variance
+
+Solution:
+Step 1: Analyze gap between curves
+Final gap: $1.8 - 0.42 = 1.38$
+
+Step 2: Analyze convergence
+Training error decreasing slowly: high bias indication
+Large gap persists: high variance indication
+
+Step 3: Determine primary issue
+Since gap > 1.0 and training error relatively high, this suggests **high bias** (underfitting).
+
+Solution: Try more complex model or additional features.
+
+**Model Selection Strategy:**
+1. Use cross-validation to estimate generalization
+2. Apply information criteria for complexity penalty
+3. Analyze learning curves to diagnose bias/variance issues
+4. Select model balancing performance and complexity
+
 ## Suggested Exercises
 - Experiment with different models on a dataset and compare their performance using cross-validation.
 - Analyze the bias-variance tradeoff by plotting learning curves for different models.

@@ -49,3 +49,97 @@ Optimization is a critical component of machine learning that enables models to 
 - Analyze the impact of learning rates on the convergence of gradient descent.
 
 This file serves as an introduction to the basics of optimization, setting the stage for deeper exploration of specific optimization techniques in subsequent sections.
+
+## Mathematical Foundation
+
+### Key Formulas
+
+**General Optimization Problem:**
+$$\min_{x \in \mathcal{D}} f(x) \quad \text{subject to} \quad g_i(x) \leq 0, \, h_j(x) = 0$$
+
+Where:
+- $f(x)$ = objective function to minimize
+- $\mathcal{D}$ = feasible domain
+- $g_i(x) \leq 0$ = inequality constraints
+- $h_j(x) = 0$ = equality constraints
+
+**Necessary Conditions for Optimality:**
+
+- **First-order condition**: $\nabla f(x^*) = 0$ (gradient is zero at optimum)
+- **Second-order condition**: $\nabla^2 f(x^*) \succeq 0$ (Hessian is positive semidefinite)
+
+**Gradient Descent Update Rule:**
+$$x_{k+1} = x_k - \alpha \nabla f(x_k)$$
+
+Where $\alpha$ is the learning rate.
+
+### Solved Examples
+
+#### Example 1: Finding Minimum of Quadratic Function
+
+Given: $f(x) = x^2 - 4x + 7$
+
+Find: Minimum value and location
+
+Solution:
+Step 1: Calculate derivative
+$$f'(x) = 2x - 4$$
+
+Step 2: Set derivative equal to zero
+$$2x - 4 = 0$$
+$$x = 2$$
+
+Step 3: Verify it's a minimum using second derivative
+$$f''(x) = 2 > 0$$ ✓ (confirms minimum)
+
+Step 4: Calculate minimum value
+$$f(2) = (2)^2 - 4(2) + 7 = 4 - 8 + 7 = 3$$
+
+Result: Minimum occurs at $x = 2$ with value $f(2) = 3$.
+
+#### Example 2: Gradient Descent for Linear Regression
+
+Given: Loss function $J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2$
+Where $h_\theta(x) = \theta_0 + \theta_1 x$
+
+Find: Gradient descent updates for parameters
+
+Solution:
+Step 1: Calculate partial derivatives
+$$\frac{\partial J}{\partial \theta_0} = \frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})$$
+$$\frac{\partial J}{\partial \theta_1} = \frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)}$$
+
+Step 2: Update rules
+$$\theta_0 := \theta_0 - \alpha \frac{\partial J}{\partial \theta_0}$$
+$$\theta_1 := \theta_1 - \alpha \frac{\partial J}{\partial \theta_1}$$
+
+Step 3: Numerical example with data points $(1, 3), (2, 5), (3, 7)$
+Initial: $\theta_0 = 0, \theta_1 = 0, \alpha = 0.01$
+
+Iteration 1:
+- Predictions: $h(1) = 0, h(2) = 0, h(3) = 0$
+- Errors: $3, 5, 7$
+- Gradients: $\frac{\partial J}{\partial \theta_0} = \frac{15}{3} = 5, \frac{\partial J}{\partial \theta_1} = \frac{1+10+21}{3} = \frac{32}{3}$
+- Updates: $\theta_0 = 0 - 0.01(5) = -0.05, \theta_1 = 0 - 0.01(\frac{32}{3}) = -0.107$
+
+#### Example 3: Constrained Optimization using Lagrange Multipliers
+
+Given: Minimize $f(x,y) = x^2 + y^2$ subject to $g(x,y) = x + y - 1 = 0$
+
+Find: Optimal point
+
+Solution:
+Step 1: Set up Lagrangian
+$$\mathcal{L}(x,y,\lambda) = x^2 + y^2 - \lambda(x + y - 1)$$
+
+Step 2: Take partial derivatives and set to zero
+$$\frac{\partial \mathcal{L}}{\partial x} = 2x - \lambda = 0 \Rightarrow x = \frac{\lambda}{2}$$
+$$\frac{\partial \mathcal{L}}{\partial y} = 2y - \lambda = 0 \Rightarrow y = \frac{\lambda}{2}$$
+$$\frac{\partial \mathcal{L}}{\partial \lambda} = -(x + y - 1) = 0 \Rightarrow x + y = 1$$
+
+Step 3: Solve system of equations
+From constraints: $x = y = \frac{\lambda}{2}$ and $x + y = 1$
+$$\frac{\lambda}{2} + \frac{\lambda}{2} = 1 \Rightarrow \lambda = 1$$
+$$x = y = \frac{1}{2}$$
+
+Result: Optimal point is $(\frac{1}{2}, \frac{1}{2})$ with minimum value $f(\frac{1}{2}, \frac{1}{2}) = \frac{1}{2}$.

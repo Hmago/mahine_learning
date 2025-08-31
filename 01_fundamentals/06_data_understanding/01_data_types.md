@@ -1,5 +1,3 @@
-# Contents for the file: /01_fundamentals/06_data_understanding/01_data_types.md
-
 # Data Types in Machine Learning
 
 ## Introduction
@@ -55,6 +53,129 @@ Image data consists of pixel values that represent visual information. It is typ
 
 ## Conclusion
 Understanding data types is fundamental in machine learning as it guides the preprocessing steps and the choice of algorithms. By recognizing the nature of your data, you can apply the appropriate techniques to extract meaningful insights and build effective models.
+
+## Mathematical Foundation
+
+### Key Formulas
+
+**Numerical Data Standardization:**
+$$z = \frac{x - \mu}{\sigma}$$
+
+Where $\mu$ is the mean and $\sigma$ is the standard deviation.
+
+**Categorical Data Encoding:**
+
+**One-Hot Encoding:** For categorical variable with $k$ categories:
+$$x_i = \begin{cases} 1 & \text{if category } = i \\ 0 & \text{otherwise} \end{cases}$$
+
+**Label Encoding:** For ordinal data:
+$$x_{encoded} = \{0, 1, 2, ..., k-1\}$$
+
+**Text Vectorization (TF-IDF):**
+$$TF\text{-}IDF(t,d) = TF(t,d) \times IDF(t)$$
+
+Where:
+$$TF(t,d) = \frac{\text{count of term } t \text{ in document } d}{\text{total terms in } d}$$
+$$IDF(t) = \log\left(\frac{N}{df(t)}\right)$$
+
+**Image Data Normalization:**
+$$x_{normalized} = \frac{x - x_{min}}{x_{max} - x_{min}}$$
+
+For pixel values typically in range [0, 255].
+
+### Solved Examples
+
+#### Example 1: Numerical Data Standardization
+
+Given: House prices dataset with the following values (in thousands):
+Prices: [200, 350, 180, 420, 290, 310, 250]
+
+Find: Standardized values
+
+Solution:
+Step 1: Calculate mean
+$$\mu = \frac{200 + 350 + 180 + 420 + 290 + 310 + 250}{7} = \frac{2000}{7} = 285.71$$
+
+Step 2: Calculate standard deviation
+$$\sigma = \sqrt{\frac{\sum(x_i - \mu)^2}{n-1}}$$
+$$\sigma = \sqrt{\frac{(200-285.71)^2 + (350-285.71)^2 + ... + (250-285.71)^2}{6}}$$
+$$\sigma = \sqrt{\frac{7345.24 + 4137.53 + 11148.08 + 18076.82 + 18.37 + 592.65 + 1275.51}{6}} = 85.92$$
+
+Step 3: Apply standardization formula
+- $z_1 = \frac{200 - 285.71}{85.92} = -0.998$
+- $z_2 = \frac{350 - 285.71}{85.92} = 0.748$
+- $z_3 = \frac{180 - 285.71}{85.92} = -1.231$
+- $z_4 = \frac{420 - 285.71}{85.92} = 1.563$
+- $z_5 = \frac{290 - 285.71}{85.92} = 0.050$
+- $z_6 = \frac{310 - 285.71}{85.92} = 0.283$
+- $z_7 = \frac{250 - 285.71}{85.92} = -0.416$
+
+Result: Standardized prices have mean 0 and standard deviation 1.
+
+#### Example 2: One-Hot Encoding for Categorical Data
+
+Given: Color feature with values: ["Red", "Blue", "Green", "Red", "Blue"]
+
+Find: One-hot encoded representation
+
+Solution:
+Step 1: Identify unique categories
+Categories: ["Red", "Blue", "Green"] → 3 categories
+
+Step 2: Create binary vectors
+- "Red" → [1, 0, 0]
+- "Blue" → [0, 1, 0]
+- "Green" → [0, 0, 1]
+
+Step 3: Apply encoding to dataset
+$$\begin{array}{c|ccc}
+\text{Original} & \text{Red} & \text{Blue} & \text{Green} \\
+\hline
+\text{Red} & 1 & 0 & 0 \\
+\text{Blue} & 0 & 1 & 0 \\
+\text{Green} & 0 & 0 & 1 \\
+\text{Red} & 1 & 0 & 0 \\
+\text{Blue} & 0 & 1 & 0
+\end{array}$$
+
+Result: 3 binary features replace 1 categorical feature.
+
+#### Example 3: TF-IDF Calculation
+
+Given: Two documents:
+- Doc 1: "machine learning is fun"
+- Doc 2: "learning algorithms are fun"
+
+Find: TF-IDF vectors for both documents
+
+Solution:
+Step 1: Create vocabulary
+Vocabulary: ["machine", "learning", "is", "fun", "algorithms", "are"]
+
+Step 2: Calculate TF for each document
+Doc 1 TF: machine=0.25, learning=0.25, is=0.25, fun=0.25, algorithms=0, are=0
+Doc 2 TF: machine=0, learning=0.25, is=0, fun=0.25, algorithms=0.25, are=0.25
+
+Step 3: Calculate IDF for each term
+- $IDF(\text{machine}) = \log\left(\frac{2}{1}\right) = \log(2) = 0.693$
+- $IDF(\text{learning}) = \log\left(\frac{2}{2}\right) = \log(1) = 0$
+- $IDF(\text{is}) = \log\left(\frac{2}{1}\right) = 0.693$
+- $IDF(\text{fun}) = \log\left(\frac{2}{2}\right) = 0$
+- $IDF(\text{algorithms}) = \log\left(\frac{2}{1}\right) = 0.693$
+- $IDF(\text{are}) = \log\left(\frac{2}{1}\right) = 0.693$
+
+Step 4: Calculate TF-IDF vectors
+Doc 1: [0.25×0.693, 0.25×0, 0.25×0.693, 0.25×0, 0, 0] = [0.173, 0, 0.173, 0, 0, 0]
+Doc 2: [0, 0.25×0, 0, 0.25×0, 0.25×0.693, 0.25×0.693] = [0, 0, 0, 0, 0.173, 0.173]
+
+Result: TF-IDF vectors capture the importance of words relative to the corpus.
+
+**Data Type Selection Guidelines:**
+1. **Numerical**: Use for measurements, counts, ratios
+2. **Categorical**: Use for groupings, classifications
+3. **Text**: Requires tokenization and vectorization
+4. **Time Series**: Requires temporal ordering consideration
+5. **Images**: Requires pixel normalization and possibly dimensionality reduction
 
 ## Exercises
 1. Identify the data types in a given dataset and explain why they are classified as such.

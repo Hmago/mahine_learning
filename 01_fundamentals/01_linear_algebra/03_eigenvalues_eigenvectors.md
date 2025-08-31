@@ -35,6 +35,95 @@ Think of eigenvectors as arrows pointing in specific directions in a multi-dimen
 ### Conclusion
 Eigenvalues and eigenvectors are powerful tools in machine learning that help us understand and manipulate data effectively. By mastering these concepts, you will be better equipped to tackle complex problems in data science and machine learning.
 
+## Mathematical Foundation
+
+### Key Formulas
+
+**Eigenvalue Equation:**
+$$A\vec{v} = \lambda\vec{v}$$
+
+Where:
+- $A$ = square matrix (n × n)
+- $\vec{v}$ = eigenvector (non-zero vector)
+- $\lambda$ = eigenvalue (scalar)
+
+**Characteristic Equation:**
+$$\det(A - \lambda I) = 0$$
+
+Where $I$ is the identity matrix.
+
+**For 2×2 Matrix:**
+If $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, then:
+- Characteristic polynomial: $\lambda^2 - (a+d)\lambda + (ad-bc) = 0$
+- Eigenvalues: $\lambda = \frac{(a+d) \pm \sqrt{(a+d)^2 - 4(ad-bc)}}{2}$
+
+### Solved Examples
+
+#### Example 1: Finding Eigenvalues and Eigenvectors (2×2 Matrix)
+
+Given: $A = \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix}$
+
+Find: Eigenvalues and eigenvectors
+
+Solution:
+Step 1: Set up characteristic equation
+$$\det(A - \lambda I) = \det\begin{bmatrix} 3-\lambda & 1 \\ 0 & 2-\lambda \end{bmatrix} = 0$$
+
+Step 2: Calculate determinant
+$$(3-\lambda)(2-\lambda) - (1)(0) = 0$$
+$$(3-\lambda)(2-\lambda) = 0$$
+
+Step 3: Solve for eigenvalues
+$$\lambda_1 = 3, \quad \lambda_2 = 2$$
+
+Step 4: Find eigenvectors
+For $\lambda_1 = 3$:
+$$(A - 3I)\vec{v} = \begin{bmatrix} 0 & 1 \\ 0 & -1 \end{bmatrix}\vec{v} = \vec{0}$$
+Eigenvector: $\vec{v_1} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
+
+For $\lambda_2 = 2$:
+$$(A - 2I)\vec{v} = \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}\vec{v} = \vec{0}$$
+Eigenvector: $\vec{v_2} = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$
+
+#### Example 2: Matrix Diagonalization
+
+Given: Matrix $A$ with eigenvalues $\lambda_1 = 5, \lambda_2 = 3$ and eigenvectors $\vec{v_1} = \begin{bmatrix} 2 \\ 1 \end{bmatrix}, \vec{v_2} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$
+
+Find: Diagonal form $A = PDP^{-1}$
+
+Solution:
+Step 1: Form matrix $P$ from eigenvectors
+$$P = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}$$
+
+Step 2: Form diagonal matrix $D$ from eigenvalues
+$$D = \begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix}$$
+
+Step 3: Calculate $P^{-1}$
+$$\det(P) = 2(1) - 1(1) = 1$$
+$$P^{-1} = \frac{1}{1}\begin{bmatrix} 1 & -1 \\ -1 & 2 \end{bmatrix} = \begin{bmatrix} 1 & -1 \\ -1 & 2 \end{bmatrix}$$
+
+Result: $A = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}\begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix}\begin{bmatrix} 1 & -1 \\ -1 & 2 \end{bmatrix}$
+
+#### Example 3: Principal Component Analysis Application
+
+Given: Covariance matrix $C = \begin{bmatrix} 4 & 2 \\ 2 & 3 \end{bmatrix}$ from a 2D dataset
+
+Find: Principal components (directions of maximum variance)
+
+Solution:
+Step 1: Find eigenvalues using characteristic equation
+$$\det(C - \lambda I) = (4-\lambda)(3-\lambda) - 4 = 0$$
+$$\lambda^2 - 7\lambda + 8 = 0$$
+
+Step 2: Solve quadratic equation
+$$\lambda = \frac{7 \pm \sqrt{49-32}}{2} = \frac{7 \pm \sqrt{17}}{2}$$
+$$\lambda_1 = \frac{7 + \sqrt{17}}{2} \approx 5.56, \quad \lambda_2 = \frac{7 - \sqrt{17}}{2} \approx 1.44$$
+
+Step 3: Interpretation
+- First principal component explains $\frac{5.56}{5.56+1.44} \times 100\% = 79.4\%$ of variance
+- Second principal component explains $20.6\%$ of variance
+- Total: $100\%$ of original variance preserved
+
 ### Suggested Reading
 - "Linear Algebra and Its Applications" by Gilbert Strang
 - Online resources on PCA and its applications in machine learning.
