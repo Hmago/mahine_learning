@@ -1,5 +1,3 @@
-# Contents for `/01_fundamentals/02_calculus_optimization/04_gradient_descent.md`
-
 ## Gradient Descent
 
 ### What is Gradient Descent?

@@ -1,5 +1,3 @@
-# Contents for `/01_fundamentals/02_calculus_optimization/03_multivariable_calculus.md`
-
 ## Multivariable Calculus in Machine Learning
 
 ### Introduction
